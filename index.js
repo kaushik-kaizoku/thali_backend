@@ -143,34 +143,34 @@ app.post('/api/reservations', async (req, res) => {
 });
 
 
-const initializeTables = async () => {
-  try {
-    // Check if any tables already exist
-    const existingTables = await prisma.table.findMany();
+// const initializeTables = async () => {
+//   try {
+//     // Check if any tables already exist
+//     const existingTables = await prisma.table.findMany();
 
-    if (existingTables.length === 0) {
-      // Insert default tables if none exist
-      await prisma.table.createMany({
-        data: [
-          { capacity: 2, number: 'T1' },
-          { capacity: 2, number: 'T2' },
-          { capacity: 4, number: 'T3' },
-          { capacity: 4, number: 'T4' },
-          { capacity: 6, number: 'T5' },
-          { capacity: 8, number: 'T6' },
-        ],
-      });
+//     if (existingTables.length === 0) {
+//       // Insert default tables if none exist
+//       await prisma.table.createMany({
+//         data: [
+//           { capacity: 2, number: 'T1' },
+//           { capacity: 2, number: 'T2' },
+//           { capacity: 4, number: 'T3' },
+//           { capacity: 4, number: 'T4' },
+//           { capacity: 6, number: 'T5' },
+//           { capacity: 8, number: 'T6' },
+//         ],
+//       });
 
-      console.log('Tables initialized');
-    }
-  } catch (error) {
-    console.error('Error initializing tables:', error);
-  } finally {
-    await prisma.$disconnect();
-  }
-};
+//       console.log('Tables initialized');
+//     }
+//   } catch (error) {
+//     console.error('Error initializing tables:', error);
+//   } finally {
+//     await prisma.$disconnect();
+//   }
+// };
 
-initializeTables();
+// initializeTables();
 
 app.listen(port, () => {
   console.log(`[server]: Server is running at http://localhost:${port}`);
