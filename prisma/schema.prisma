@@ -1,0 +1,28 @@
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+model Table {
+  id            String @id @default(auto()) @map("_id") @db.ObjectId
+  capacity      Int
+  number        String @unique
+  reservations  Reservation[]
+}
+
+model Reservation {
+  id          String @id @default(auto()) @map("_id") @db.ObjectId
+  table Table @relation(fields: [tableId], references: [number])
+  tableId     String 
+  timeSlot    String
+  guests      Int
+  date        DateTime 
+  name        String
+  phone       String
+  createdAt   DateTime @default(now())
+}
